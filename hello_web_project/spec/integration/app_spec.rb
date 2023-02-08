@@ -8,7 +8,23 @@ RSpec.describe Application do
 
   let(:app) { Application.new }
 
-  context "POST /" do
+  context 'GET /hello' do
+    it 'returns "Hello!"' do
+      response = get('/hello')
+      expect(response.status).to be(200)
+      expect(response.body).to include('<h1>Hello!</h1>')
+    end
+  end
+  
+  context 'GET /names' do
+    it 'returns the list of names' do
+      response = get('/names?names=Julia, Mary, Karim')
+      expect(response.status).to be(200)
+      expect(response.body).to eq("Julia, Mary, Karim")
+    end
+  end
+
+  context 'POST /sort-names' do
     it 'returns names in alphabetical order: Alice,Joe,Julia,Kieran,Zoe' do
       response = post('/sort-names?names=Joe,Alice,Zoe,Julia,Kieran')
 
