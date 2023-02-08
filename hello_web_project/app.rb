@@ -9,10 +9,22 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  # get '/hello' do 
+  #   name = params[:name]
+  #   return "Hello #{name}"
+  # end
+
+  get '/hello' do
+    return erb(:index)
+  end
+  
+  get '/names' do
+    names = params[:names]
+    return "#{names}"
+  end
+  
   post '/sort-names' do
     names = params[:names]
-    names_array = names.split(",")
-    names_sorted = names_array.sort.join(",")
-    return names_sorted
+    return names.split(",").sort.join(",")
   end
 end
